@@ -1,4 +1,4 @@
-module github.com/blacktop/partialzip
+module github.com/heyleke/partialzip
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
