@@ -47,7 +47,7 @@ func (p *PartialZip) init() error {
 	resp, _ := client.Do(req)
 	p.Size = resp.ContentLength
 
-	for offset < 0 && chuck < (100 * 1024) {
+	for offset < 0 && chuck < (1000 * 1024) {
 		//increase until we have enough to hold in the offset
 		chuck = 10 * chuck
 
