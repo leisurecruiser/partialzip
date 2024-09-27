@@ -1,8 +1,8 @@
 # partialzip
 
-[![GoDoc](https://godoc.org/github.com/blacktop/partialzip?status.svg)](https://godoc.org/github.com/blacktop/partialzip) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![GoDoc](https://godoc.org/github.com/leisurecruiser/partialzip?status.svg)](https://godoc.org/github.com/leisurecruiser/partialzip) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
-> Partial Implementation of PartialZip in Go
+> Implementation of PartialZip in Go
 
 ---
 
@@ -13,7 +13,7 @@ If you need to download a VERY large zip, but you only need some small file from
 ## Install
 
 ```bash
-go get github.com/blacktop/partialzip
+go get github.com/leisurecruiser/partialzip
 ```
 
 ## Example
@@ -23,30 +23,34 @@ import (
     "fmt"
     "log"
 
-    "github.com/blacktop/partialzip"
+    "github.com/leisurecruiser/partialzip"
 )
 
 func main() {
-    pzip, err := partialzip.New("https://apple.com/ipsw/download/link")
+    pzip, err := partialzip.New("https://example.com/archive.zip")
     if err != nil {
         log.Fatal(err)
     }
 
-    fmt.Println(pzip.List())
+    // List files containing in the remote ZIP.
+    files := pzip.List()
+    for _, file := range files {
+        fmt.Println(file)
+    }
 
-    n, err := pzip.Download("kernelcache.release.iphone11")
+    // Download specific file from the remote ZIP.
+    buffer, err := pzip.Download("subfolder/somefile.txt")
     if err != nil {
         log.Fatal(err)
     }
-    fmt.Printf("extracting kernelcache.release.iphone11, wrote %d bytes\n", n)
+    
+    // ...save buffer to a specific file or process it on your own way.
 }
 ```
 
-```bash
-extracting "kernelcache.release.iphone11", wrote 17842148 bytes
-```
-
 ## CLI
+
+> **NOTE**: CLI module remains unchanged and may work incorrectly.
 
 ### Install
 
